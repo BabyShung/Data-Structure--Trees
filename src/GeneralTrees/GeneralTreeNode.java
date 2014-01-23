@@ -2,270 +2,77 @@ package GeneralTrees;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
-import java.util.Queue;
-import java.util.Stack;
 
 import Interfaces.Position;
 import Interfaces.Tree;
 
-public class GeneralTreeNode<T> implements Tree<T> {
-	private GeneralTree<T> root;
-	private int size;
+public class GeneralTreeNode<T> implements Position<T>
+{
+    // A reference to the tree which this particular TreeNode is a member of.
+    // We can then check to see if a node is in fact a member of a tree before
+    // we 'operate' on it.
+    private Tree<T> tree;
+    private T element;
+    private ArrayList<GeneralTreeNode<T>> children;
+    private GeneralTreeNode<T> parent;
 
-	public GeneralTreeNode(T rootElement) {
-		root = new GeneralTree<T>(rootElement, null, this);
-		size = 1;
-	}
 
-	@Override
-	public Position<T> root() {
-		return root;
-	}
+    public GeneralTreeNode( T elem, GeneralTreeNode<T> p, Tree<T> t )
+    {
+        element = elem;
+        children = new ArrayList<GeneralTreeNode<T>>( );
+        parent = p;
+        tree = t;
+    }
+    
+    // Return the element stored by this particular tree node
+    @Override
+    public T element( )
+    {
+        return element;
+    }
+ 
+    // Return the children of this TreeNode in an Iterator form
+    public Iterator<GeneralTreeNode<T>> getChildren( )
+    {
+        return children.iterator();
+    }
 
-	@Override
-	public Iterator<? extends Position<T>> children(Position<T> pos) {
-		return castPositionToNode(pos).getChildren();
-	}
+    public ArrayList<GeneralTreeNode<T>> getDirectChilren()
+    {
+        return children;
+    }
 
-	@Override
-	public Position<T> parent(Position<T> pos) {
-		return castPositionToNode(pos).getParent();
-	}
-
-	@Override
-	public Position<T> addChild(Position<T> parent, T element) {
-		size++;
-		return castPositionToNode(parent).addChild(
-				new GeneralTree<T>(element, castPositionToNode(parent), this));
-	}
-
-	@Override
-	public T replace(Position<T> pos, T newElement) {
-		return castPositionToNode(pos).replace(newElement);
-	}
-
-	@Override
-	public int size() {
-		return size;
-	}
-
-	@Override
-	public boolean isInternal(Position<T> pos) {
-		return castPositionToNode(pos).getChildren().hasNext();
-	}
-
-	@Override
-	public boolean isRoot(Position<T> pos) {
-		return pos == root;
-	}
-
-	// This private method is used to see if a given position is a member of
-	// this particular tree. It first checks to make sure 'pos' is of type
-	// TreeNode, and if it is, checks to see if its tree reference is to this
-	// particular tree. If not, an exception is thrown.
-	private void checkTreeMembership(Position<T> pos) {
-		if (!(pos instanceof GeneralTree) || !((GeneralTree<T>) pos).sameTree(this)) {
-			throw new IllegalArgumentException("Invalid position for this "
-					+ "tree.");
-		}
-	}
-
-	// Private helper method that takes a Position and returns the TreeNode
-	// corresponding with that position (or throws an exception if the TreeNode
-	// is not a valid node from this tree)
-	private GeneralTree<T> castPositionToNode(Position<T> pos) {
-		checkTreeMembership(pos);
-		return (GeneralTree<T>) pos;
-	}
-
-	// ---------------------------------------------------------------------
-
-	// Return an Iterator over the Positions of the tree
-	@Override
-	public Iterator<Position<T>> iterator() {
-		// Hao implements DFS iterator
-		// return new DepthFirstIterator();
-		// return new BreadthFirstIterator();
-		// return new DepthFirstIterator2();
-		return new BreadthFirstIterator();
-	}
-
-	private class DepthFirstIterator implements Iterator<Position<T>> {
-
-		GeneralTree<T> cursor = root;
-
-		Queue<GeneralTree<T>> OutputQueue;
-
-		public DepthFirstIterator() {
-			OutputQueue = new LinkedList<GeneralTree<T>>();
-			this.buildDFSTraversal(cursor);
-		}
-
-		private void buildDFSTraversal(GeneralTree<T> cur) {
-			OutputQueue.add(cur);
-			Iterator<GeneralTree<T>> it = cur.getChildren();
-			while (it.hasNext()) {
-				this.buildDFSTraversal(it.next());
-			}
-		}
-
-		@Override
-		public boolean hasNext() {
-			return !OutputQueue.isEmpty();
-		}
-
-		@Override
-		public Position<T> next() {
-			if (!hasNext()) {
-				throw new NoSuchElementException();
-			}
-
-			return OutputQueue.poll();
-		}
-
-		@Override
-		public void remove() {
-			throw new UnsupportedOperationException(
-					"Cannot remove from tree iterator.");
-		}
-	}
-
-	private class DepthFirstIterator2 implements Iterator<Position<T>> {
-
-		GeneralTree<T> cursor = root;
-		Stack<GeneralTree<T>> stack;
-		Queue<GeneralTree<T>> OutputQueue;
-
-		public DepthFirstIterator2() {
-			stack = new Stack<GeneralTree<T>>();
-			OutputQueue = new LinkedList<GeneralTree<T>>();
-			this.buildStack(cursor);
-		}
-
-		private void buildStack(GeneralTree<T> cur) {
-			if (cur != null)
-				stack.push(cur);
-
-			while (!stack.isEmpty()) {
-				GeneralTree<T> tmp = stack.pop();
-				OutputQueue.add(tmp);
-				Iterator<GeneralTree<T>> it = tmp.getChildren();
-				while (it.hasNext()) {
-					this.buildStack(it.next());
-				}
-			}
-		}
-
-		@Override
-		public boolean hasNext() {
-			return !OutputQueue.isEmpty();
-		}
-
-		@Override
-		public Position<T> next() {
-			if (!hasNext()) {
-				throw new NoSuchElementException();
-			}
-
-			return OutputQueue.poll();
-		}
-
-		@Override
-		public void remove() {
-			throw new UnsupportedOperationException(
-					"Cannot remove from tree iterator.");
-		}
-	}
-
-	// This iterator returns elements in a 'breadth-first' order
-	private class BreadthFirstIterator implements Iterator<Position<T>> {
-		GeneralTree<T> cursor = root;
-		Queue<GeneralTree<T>> queue;
-		Queue<GeneralTree<T>> OutputQueue;
-
-		public BreadthFirstIterator() {
-			queue = new LinkedList<GeneralTree<T>>();
-			OutputQueue = new LinkedList<GeneralTree<T>>();
-			this.buildQueue(cursor);
-		}
-
-		private void buildQueue(GeneralTree<T> cur) {
-			if (cur != null)
-				queue.add(cur);
-
-			while (!queue.isEmpty()) {
-				GeneralTree<T> tmp = queue.poll();
-				OutputQueue.add(tmp);
-				Iterator<GeneralTree<T>> it = tmp.getChildren();
-				while (it.hasNext()) {
-					queue.add(it.next());
-				}
-			}
-		}
-
-		@Override
-		public boolean hasNext() {
-			return !OutputQueue.isEmpty();
-		}
-
-		@Override
-		public Position<T> next() {
-			if (!hasNext()) {
-				throw new NoSuchElementException();
-			}
-
-			return OutputQueue.poll();
-		}
-
-		@Override
-		public void remove() {
-			throw new UnsupportedOperationException(
-					"Cannot remove from tree iterator.");
-		}
-	}
-
-	private class PostOrderIterator implements Iterator<Position<T>> {
-		GeneralTree<T> cursor = root;
-		Queue<GeneralTree<T>> OutputQueue;
-
-		public PostOrderIterator() {
-			OutputQueue = new LinkedList<GeneralTree<T>>();
-			this.buildPostOrderTraversal(cursor);
-		}
-
-		private void buildPostOrderTraversal(GeneralTree<T> cur) {
-			Iterator<GeneralTree<T>> it = cur.getChildren();
-			while (it.hasNext()) {
-				this.buildPostOrderTraversal(it.next());
-			}
-			OutputQueue.add(cur);
-		}
-
-		@Override
-		public boolean hasNext() {
-			return !OutputQueue.isEmpty();
-		}
-
-		@Override
-		public Position<T> next() {
-			if (!hasNext()) {
-				throw new NoSuchElementException();
-			}
-
-			return OutputQueue.poll();
-		}
-
-		@Override
-		public void remove() {
-			throw new UnsupportedOperationException(
-					"Cannot remove from tree iterator.");
-		}
-	}
-
-	public ArrayList<GeneralTree<T>> TreeGetChildren(Position<T> pos) {
-		return castPositionToNode(pos).getDirectChilrean();
-	}
-
+    public GeneralTreeNode<T> getParent( )
+    {
+        return parent;
+    }
+    
+    // Add child to the set of children of this node and return the child
+    public GeneralTreeNode<T> addChild( GeneralTreeNode<T> child )
+    {
+        children.add( child );
+        return child;
+    }
+    
+    public T replace( T newElement )
+    {
+        T oldElement = element;
+        element = newElement;
+        return oldElement;
+    }
+    
+    @Override
+    public String toString( )
+    {
+        return element.toString( );
+    }
+    
+    // Check to see if in fact this node is a member of the right tree.  I am
+    // going to make this 'package private' -- I only want my Tree class to be
+    // doing this checking.
+    boolean sameTree( Tree<T> t )
+    {
+        return t == tree;
+    }
 }
