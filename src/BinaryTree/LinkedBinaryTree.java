@@ -21,6 +21,10 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 		size = 0;
 	}
 
+	public LinkedBinaryTree(T ele) throws NoEmptyTreeException{
+		addRoot(ele);
+	}
+	
 	@Override
 	public Position<T> root() throws EmptyTreeException {
 		if (root == null)
@@ -31,6 +35,8 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 	@Override
 	public Iterable<? extends Position<T>> children(Position<T> p)
 			throws InvalidPositionException, BoundaryViolationException {
+
+		// focusing on a particular node, return 0, 1 or 2 children
 		ArrayList<Position<T>> children = new ArrayList<Position<T>>();
 		if (hasLeft(p))
 			children.add(left(p));
@@ -42,17 +48,13 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 	@Override
 	public Position<T> parent(Position<T> p) throws BoundaryViolationException,
 			InvalidPositionException {
+
 		BTPosition<T> rp = checkPosition(p);
+		// node get its parent
 		Position<T> parentP = rp.getParent();
 		if (parentP == null)
 			throw new BoundaryViolationException("No parent");
 		return parentP;
-	}
-
-	@Override
-	public Position<T> addChild(Position<T> parent, T element) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -100,6 +102,7 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 		return ps.iterator();
 	}
 
+	// binary tree interface
 	@Override
 	public Position<T> left(Position<T> p) throws BoundaryViolationException,
 			InvalidPositionException {
@@ -146,6 +149,14 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 		return (BTPosition<T>) p;
 	}
 
+	private Iterable<Position<T>> positions() throws InvalidPositionException,
+			BoundaryViolationException, EmptyTreeException {
+		ArrayList<Position<T>> ps = new ArrayList<Position<T>>();
+		if (size != 0)
+			preOrderPositions(root(), ps);
+		return ps;
+	}
+
 	private void preOrderPositions(Position<T> p, ArrayList<Position<T>> pal)
 			throws InvalidPositionException, BoundaryViolationException {
 		pal.add(p);
@@ -153,14 +164,6 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 			preOrderPositions(left(p), pal);
 		if (hasRight(p))
 			preOrderPositions(right(p), pal);
-	}
-
-	private Iterable<Position<T>> positions() throws InvalidPositionException,
-			BoundaryViolationException, EmptyTreeException {
-		ArrayList<Position<T>> ps = new ArrayList<Position<T>>();
-		if (size != 0)
-			preOrderPositions(root(), ps);
-		return ps;
 	}
 
 	public Position<T> addRoot(T ele) throws NoEmptyTreeException {
@@ -194,5 +197,7 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 		size++;
 		return newNode;
 	}
+
+
 
 }

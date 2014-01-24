@@ -35,13 +35,6 @@ public class GeneralTree<T> implements Tree<T> {
 	}
 
 	@Override
-	public Position<T> addChild(Position<T> parent, T element) {
-		size++;
-		return castPositionToNode(parent).addChild(
-				new GeneralTreeNode<T>(element, castPositionToNode(parent), this));
-	}
-
-	@Override
 	public T replace(Position<T> pos, T newElement) {
 		return castPositionToNode(pos).replace(newElement);
 	}
@@ -61,12 +54,21 @@ public class GeneralTree<T> implements Tree<T> {
 		return pos == root;
 	}
 
+	//add child
+	public Position<T> addChild(Position<T> parent, T element) {
+		size++;
+		return castPositionToNode(parent).addChild(
+				new GeneralTreeNode<T>(element, castPositionToNode(parent), this));
+	}
+	
+	
 	// This private method is used to see if a given position is a member of
 	// this particular tree. It first checks to make sure 'pos' is of type
 	// TreeNode, and if it is, checks to see if its tree reference is to this
 	// particular tree. If not, an exception is thrown.
 	private void checkTreeMembership(Position<T> pos) {
-		if (!(pos instanceof GeneralTreeNode) || !((GeneralTreeNode<T>) pos).sameTree(this)) {
+		if (!(pos instanceof GeneralTreeNode)
+				|| !((GeneralTreeNode<T>) pos).sameTree(this)) {
 			throw new IllegalArgumentException("Invalid position for this "
 					+ "tree.");
 		}
@@ -266,11 +268,11 @@ public class GeneralTree<T> implements Tree<T> {
 
 	@Override
 	public boolean isEmpty() {
-		return size==0;
+		return size == 0;
 	}
 
-//	public ArrayList<GeneralTree<T>> TreeGetChildren(Position<T> pos) {
-//		return castPositionToNode(pos).getDirectChilrean();
-//	}
+	// public ArrayList<GeneralTree<T>> TreeGetChildren(Position<T> pos) {
+	// return castPositionToNode(pos).getDirectChilrean();
+	// }
 
 }

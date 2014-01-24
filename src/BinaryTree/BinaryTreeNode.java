@@ -4,6 +4,7 @@ import Interfaces.BTPosition;
 
 public class BinaryTreeNode<T> implements BTPosition<T> {
 
+	//storing structure
 	private T element;
 	private BTPosition<T> left, right, parent;
 
