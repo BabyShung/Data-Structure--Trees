@@ -4,9 +4,43 @@ import BinaryTree.LinkedBinaryTree;
 import Exceptions.EmptyTreeException;
 import Exceptions.InvalidPositionException;
 import Interfaces.BTPosition;
+import Interfaces.Comparator;
 import Interfaces.Position;
 
 public class Traveral_BinaryTree<T> extends LinkedBinaryTree<T> {
+
+	private Comparator<T> comparator;
+
+	public Traveral_BinaryTree(Comparator<T> comp) {
+		comparator = comp;
+	}
+
+	public T BSTNextLargest(T key) throws InvalidPositionException,
+			EmptyTreeException {
+		return BSTNextLargestRec(key, checkPosition(root()));
+	}
+
+	
+	//seems inefficient, come up with a new one later
+	private T BSTNextLargestRec(T key, BTPosition<T> node) {
+		
+		T found = null;
+
+		if (node.getLeft() != null) {
+			found = BSTNextLargestRec(key, node.getLeft());
+		}
+
+		if (comparator.compare(node.element(), key) > 0 && found == null) {
+			found = node.element();
+		}
+
+		if (node.getRight() != null && found == null) {
+			found = BSTNextLargestRec(key, node.getRight());
+		}
+
+		return found;
+
+	}
 
 	public void preOrderTraveral() throws EmptyTreeException,
 			InvalidPositionException {

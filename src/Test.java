@@ -5,6 +5,7 @@ import Exceptions.EmptyTreeException;
 import Exceptions.InvalidPositionException;
 import Exceptions.NoEmptyTreeException;
 import Interfaces.BTPosition;
+import Interfaces.Comparator;
 import Interfaces.Position;
 import applications.Traveral_BinaryTree;
 
@@ -40,8 +41,19 @@ public class Test {
 		// }
 
 		// test binary search tree
-		Traveral_BinaryTree<Object> lbt = new Traveral_BinaryTree<>();
-		BTPosition<Object> root, left, right;
+		Traveral_BinaryTree<Integer> lbt = new Traveral_BinaryTree<>(new Comparator<Integer>() {
+
+			@Override
+			public int compare(Integer a, Integer b) {
+				if (a < b)
+					return -1;
+				else if (a > b)
+					return 1;
+				else
+					return 0;
+			}
+		});
+		BTPosition<Integer> root, left, right;
 		root = lbt.addRoot(5);
 
 		left = lbt.insertLeft(root, 3);
@@ -58,7 +70,7 @@ public class Test {
 		lbt.insertRight(right, 9);
 		System.out.println("left " + root.getRight().getLeft().element());
 		System.out.println("right " + root.getRight().getRight().element());
-		for (Position<Object> tmp : lbt) {
+		for (Position<Integer> tmp : lbt) {
 			System.out.print(tmp.element() + " ");
 		}
 		System.out.println();
@@ -67,6 +79,10 @@ public class Test {
 		lbt.inOrderTraveral();
 		lbt.postOrderTraveral();
 
+		
+		System.out.println("next largest: "+lbt.BSTNextLargest(5));
+		
+		
 		// BinarySearchTreeMap<Integer, String> bstm = new
 		// BinarySearchTreeMap<>(
 		// new Comparator<Integer>() {
