@@ -1,5 +1,14 @@
 package BinaryTree;
 
+/**
+ * 
+ * binary tree node, implementing BTPosition (BTPosition also implements from Position interface)
+ * 
+ * four instance variables:
+ * element, left, right, parent
+ * 
+ */
+
 import Interfaces.BTPosition;
 
 public class BinaryTreeNode<T> implements BTPosition<T> {
