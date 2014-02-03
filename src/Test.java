@@ -126,7 +126,7 @@ public class Test {
 		bst.postOrderTraveral();
 		
 		System.out.println(bst.treeHeight(bst.root()));
-		
+		System.out.println(bst.treeDepth(bst.root()));
 	}
 
 }

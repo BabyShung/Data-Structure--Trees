@@ -114,6 +114,11 @@ public class BinarySearchTree<T> extends Traveral_BinaryTree<T> {
 		}
 	}
 
+	/**
+	 * depth and height
+	 * 
+	 */
+
 	public int treeHeight(Position<T> current) throws InvalidPositionException {
 
 		BTPosition<T> currentBT = checkPosition(current);
@@ -128,6 +133,18 @@ public class BinarySearchTree<T> extends Traveral_BinaryTree<T> {
 			return 0;
 		return 1 + Math.max(treeHeightRec(current.getLeft()),
 				treeHeightRec(current.getRight()));
+	}
+
+	public int treeDepth(Position<T> current) throws InvalidPositionException {
+		BTPosition<T> currentBT = checkPosition(current);
+		return treeDepthRec(currentBT);
+	}
+
+	private int treeDepthRec(BTPosition<T> current)
+			throws InvalidPositionException {
+		if (current == root)
+			return 1;
+		return 1 + treeDepthRec(current.getParent());
 	}
 
 }
