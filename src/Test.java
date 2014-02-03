@@ -119,10 +119,13 @@ public class Test {
 		bst.insertNode(4);
 		bst.insertNode(6);
 		bst.insertNode(9);
+		bst.insertNode(8);
 		System.out.println(bst.SearchNode(bst.root(), 3));
 		bst.inOrderTraveral();
 		bst.preOrderTraveral();
 		bst.postOrderTraveral();
+		
+		System.out.println(bst.treeHeight(bst.root()));
 		
 	}
 

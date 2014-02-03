@@ -22,7 +22,6 @@ package BinarySearchTree;
  * 
  */
 
-
 import applications.Traveral_BinaryTree;
 import BinaryTree.BinaryTreeNode;
 import Exceptions.InvalidPositionException;
@@ -33,10 +32,9 @@ import Interfaces.Position;
 
 public class BinarySearchTree<T> extends Traveral_BinaryTree<T> {
 
-	public BinarySearchTree(Comparator<T> comp){
+	public BinarySearchTree(Comparator<T> comp) {
 		super(comp);
 	}
-	
 
 	// Iterative Search Node
 	public Position<T> SearchNode(Position<T> root, T value)
@@ -75,10 +73,10 @@ public class BinarySearchTree<T> extends Traveral_BinaryTree<T> {
 
 	}
 
-	//iterative insert node
+	// iterative insert node
 	public Position<T> insertNode(T value) throws NoEmptyTreeException,
 			InvalidPositionException {
-		
+
 		if (root == null) {
 			return addRoot(value);
 		}
@@ -108,9 +106,28 @@ public class BinarySearchTree<T> extends Traveral_BinaryTree<T> {
 					parent.setRight(newNode);
 					return newNode;
 				}
+			} else { // currentV equals value, I ignored this case, you can
+						// define the case
+				return null;
 			}
 
 		}
+	}
+
+	public int treeHeight(Position<T> current) throws InvalidPositionException {
+
+		BTPosition<T> currentBT = checkPosition(current);
+
+		return treeHeightRec(currentBT);
+
+	}
+
+	private int treeHeightRec(BTPosition<T> current)
+			throws InvalidPositionException {
+		if (current == null)
+			return 0;
+		return 1 + Math.max(treeHeightRec(current.getLeft()),
+				treeHeightRec(current.getRight()));
 	}
 
 }
