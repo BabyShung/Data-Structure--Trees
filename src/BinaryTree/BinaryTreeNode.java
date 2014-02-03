@@ -64,5 +64,10 @@ public class BinaryTreeNode<T> implements BTPosition<T> {
 	public void setElement(T ele) {
 		element = ele;
 	}
+	
+	@Override
+	public String toString(){
+		return element.toString();
+	}
 
 }

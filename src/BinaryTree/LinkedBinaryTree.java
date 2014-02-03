@@ -6,8 +6,17 @@ package BinaryTree;
  * 
  * Binary tree
  * 
+ * -Interface implementations:
+ * left,
+ * right,
+ * hasLeft,
+ * hasRight
  * 
  * 
+ * -New methods:
+ * addRoot,
+ * insertLeft,
+ * insertRight
  * 
  * 
  */
@@ -23,6 +32,7 @@ import Exceptions.NoEmptyTreeException;
 import Interfaces.BTPosition;
 import Interfaces.BinaryTree;
 import Interfaces.Position;
+
 
 public class LinkedBinaryTree<T> implements BinaryTree<T> {
 

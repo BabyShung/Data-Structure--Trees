@@ -1,5 +1,12 @@
 package BinarySearchTree;
 
+/**
+ * 
+ * not completed, use BinarySearchTree instead.
+ * 
+ */
+
+
 import java.security.InvalidKeyException;
 import java.util.ArrayList;
 

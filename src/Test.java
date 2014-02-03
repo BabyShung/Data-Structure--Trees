@@ -1,5 +1,6 @@
 import java.security.InvalidKeyException;
 
+import BinarySearchTree.BinarySearchTree;
 import Exceptions.BoundaryViolationException;
 import Exceptions.EmptyTreeException;
 import Exceptions.InvalidPositionException;
@@ -98,6 +99,31 @@ public class Test {
 		// }
 		// });
 
+		
+		BinarySearchTree<Integer> bst = new BinarySearchTree<>(new Comparator<Integer>() {
+
+			@Override
+			public int compare(Integer a, Integer b) {
+				if (a < b)
+					return -1;
+				else if (a > b)
+					return 1;
+				else
+					return 0;
+			}
+		});
+		bst.insertNode(5);
+		bst.insertNode(3);
+		bst.insertNode(7);
+		bst.insertNode(2);
+		bst.insertNode(4);
+		bst.insertNode(6);
+		bst.insertNode(9);
+		System.out.println(bst.SearchNode(bst.root(), 3));
+		bst.inOrderTraveral();
+		bst.preOrderTraveral();
+		bst.postOrderTraveral();
+		
 	}
 
 }

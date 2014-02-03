@@ -9,10 +9,10 @@ import Interfaces.Position;
 
 public class Traveral_BinaryTree<T> extends LinkedBinaryTree<T> {
 
-	private Comparator<T> comparator;
+	protected Comparator<T> comp;
 
 	public Traveral_BinaryTree(Comparator<T> comp) {
-		comparator = comp;
+		this.comp = comp;
 	}
 
 	public T BSTNextLargest(T key) throws InvalidPositionException,
@@ -30,7 +30,7 @@ public class Traveral_BinaryTree<T> extends LinkedBinaryTree<T> {
 			found = BSTNextLargestRec(key, node.getLeft());
 		}
 
-		if (comparator.compare(node.element(), key) > 0 && found == null) {
+		if (comp.compare(node.element(), key) > 0 && found == null) {
 			found = node.element();
 		}
 
