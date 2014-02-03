@@ -1,8 +1,30 @@
 package BinarySearchTree;
 
+/**
+ * Binary Search Tree based on linked list
+ * 
+ * It extends the self-defined Traveral_BinaryTree, which has all the traversals (pre,post,in order).
+ * Traveral_BinaryTree extends the LinkedBinaryTree ( basic methods: getLeft,getRight,etc).
+ * 
+ * 
+ * 
+ * Own methods:
+ * 
+ * SearchNode, O(logN) if it is balanced
+ * insertNode, O(logN) if it is balanced
+ * 
+ * 
+ * 
+ * will improve the code and add delete method later.
+ * 
+ * 
+ * @author haozheng
+ * 
+ */
+
+
 import applications.Traveral_BinaryTree;
 import BinaryTree.BinaryTreeNode;
-import BinaryTree.LinkedBinaryTree;
 import Exceptions.InvalidPositionException;
 import Exceptions.NoEmptyTreeException;
 import Interfaces.BTPosition;
