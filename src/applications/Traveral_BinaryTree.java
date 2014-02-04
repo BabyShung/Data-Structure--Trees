@@ -1,5 +1,22 @@
 package applications;
 
+/**
+ * This is a self-defined normal binary tree extends the "LinkedBinaryTree"
+ * 
+ * Added comparator-
+ * 
+ * Added methods:
+ * 
+ * 1.pre-order traversal
+ * 2.in-order traversal
+ * 3.post-order traversal
+ * 4.isBST
+ * 
+ * 
+ * 
+ */
+
+
 import BinaryTree.LinkedBinaryTree;
 import Exceptions.EmptyTreeException;
 import Exceptions.InvalidPositionException;
@@ -15,40 +32,6 @@ public class Traveral_BinaryTree<T> extends LinkedBinaryTree<T> {
 		this.comp = comp;
 	}
 
-	/**
-	 * get next largest
-	 * 
-	 * @param key
-	 * @return
-	 * @throws InvalidPositionException
-	 * @throws EmptyTreeException
-	 */
-
-	public T BSTNextLargest(T key) throws InvalidPositionException,
-			EmptyTreeException {
-		return BSTNextLargestRec(key, checkPosition(root()));
-	}
-
-	// seems inefficient, come up with a new one later
-	private T BSTNextLargestRec(T key, BTPosition<T> node) {
-
-		T found = null;
-
-		if (node.getLeft() != null) {
-			found = BSTNextLargestRec(key, node.getLeft());
-		}
-
-		if (comp.compare(node.element(), key) > 0 && found == null) {
-			found = node.element();
-		}
-
-		if (node.getRight() != null && found == null) {
-			found = BSTNextLargestRec(key, node.getRight());
-		}
-
-		return found;
-
-	}
 
 	/**
 	 * pre-order traversal

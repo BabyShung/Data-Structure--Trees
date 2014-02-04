@@ -9,7 +9,6 @@ import Interfaces.BTPosition;
 import Interfaces.Comparator;
 import Interfaces.Position;
 import applications.Traveral_BinaryTree;
-import applications.isBinarySearchTree;
 
 public class Test {
 
@@ -42,7 +41,7 @@ public class Test {
 		// System.out.print(tmp.element() + " ");
 		// }
 
-		// test binary search tree
+		// test binary tree
 		Traveral_BinaryTree<Integer> tbt = new Traveral_BinaryTree<>(
 				new Comparator<Integer>() {
 
@@ -75,8 +74,6 @@ public class Test {
 		tbt.inOrderTraveral();
 		tbt.postOrderTraveral();
 
-		System.out.println("Traveral-tree next largest: "
-				+ tbt.BSTNextLargest(5));
 		System.out.println("isBST: "
 				+ tbt.isBST(Integer.MIN_VALUE, Integer.MAX_VALUE));
 
@@ -109,7 +106,7 @@ public class Test {
 		System.out.println("root tree height: " + bst.treeHeight(bst.root()));
 		System.out.println("root tree depth: " + bst.treeDepth(bst.root()));
 
-		System.out.println("BST next largest: " + bst.BSTNextLargest(7));
+		System.out.println("BST next largest: " + bst.NextLargest(7));
 
 		System.out.println("isBST: "
 				+ bst.isBST(Integer.MIN_VALUE, Integer.MAX_VALUE));

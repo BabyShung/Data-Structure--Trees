@@ -10,10 +10,11 @@ package BinarySearchTree;
  * 
  * Own methods:
  * 
- * SearchNode, O(logN) if it is balanced
- * 
- * insertNode, O(logN) if it is balanced
- * 
+ * 1.SearchNode, O(logN) if it is balanced
+ * 2.insertNode, O(logN) if it is balanced
+ * 3.getNextLargest
+ * 4.treeHeight
+ * 5.treeDepth
  * 
  * 
  * will improve the code and add delete method later.
@@ -25,6 +26,7 @@ package BinarySearchTree;
 
 import applications.Traveral_BinaryTree;
 import BinaryTree.BinaryTreeNode;
+import Exceptions.EmptyTreeException;
 import Exceptions.InvalidPositionException;
 import Exceptions.NoEmptyTreeException;
 import Interfaces.BTPosition;
@@ -146,6 +148,38 @@ public class BinarySearchTree<T> extends Traveral_BinaryTree<T> {
 		if (current == root)
 			return 1;
 		return 1 + treeDepthRec(current.getParent());
+	}
+
+	/**
+	 * get next largest
+	 * 
+	 * @param key
+	 */
+
+	public T NextLargest(T key) throws InvalidPositionException,
+			EmptyTreeException {
+		return NextLargestRec(key, checkPosition(root()));
+	}
+
+	// seems inefficient, come up with a new one later
+	private T NextLargestRec(T key, BTPosition<T> node) {
+
+		T found = null;
+
+		if (node.getLeft() != null) {
+			found = NextLargestRec(key, node.getLeft());
+		}
+
+		if (comp.compare(node.element(), key) > 0 && found == null) {
+			found = node.element();
+		}
+
+		if (node.getRight() != null && found == null) {
+			found = NextLargestRec(key, node.getRight());
+		}
+
+		return found;
+
 	}
 
 }
