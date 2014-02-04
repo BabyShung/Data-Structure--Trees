@@ -11,6 +11,7 @@ package BinarySearchTree;
  * Own methods:
  * 
  * SearchNode, O(logN) if it is balanced
+ * 
  * insertNode, O(logN) if it is balanced
  * 
  * 

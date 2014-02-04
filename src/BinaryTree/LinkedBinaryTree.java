@@ -21,7 +21,6 @@ package BinaryTree;
  * 
  */
 
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -33,21 +32,19 @@ import Interfaces.BTPosition;
 import Interfaces.BinaryTree;
 import Interfaces.Position;
 
-
 public class LinkedBinaryTree<T> implements BinaryTree<T> {
 
 	protected BTPosition<T> root;
 	protected int size;
 
 	public LinkedBinaryTree() {
-		root = null;
-		size = 0;
+
 	}
 
-	public LinkedBinaryTree(T ele) throws NoEmptyTreeException{
+	public LinkedBinaryTree(T ele) throws NoEmptyTreeException {
 		addRoot(ele);
 	}
-	
+
 	@Override
 	public Position<T> root() throws EmptyTreeException {
 		if (root == null)
@@ -107,8 +104,7 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 		return (p == root());
 	}
 
-	
-	//used preOrder to traverse
+	// used preOrder to traverse
 	@Override
 	public Iterator<Position<T>> iterator() {
 		Iterable<Position<T>> ps = null;
@@ -177,10 +173,10 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 	private Iterable<Position<T>> positions() throws InvalidPositionException,
 			BoundaryViolationException, EmptyTreeException {
 		ArrayList<Position<T>> ps = new ArrayList<Position<T>>();
-		if (size != 0){
+		if (size != 0) {
 			preOrderPositions(root(), ps);
-			//inOrderPositions(root(), ps);
-			//postOrderPositions(root(), ps);
+			// inOrderPositions(root(), ps);
+			// postOrderPositions(root(), ps);
 		}
 		return ps;
 	}
@@ -193,26 +189,27 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 		if (hasRight(p))
 			preOrderPositions(right(p), pal);
 	}
-	
-//	private void inOrderPositions(Position<T> p, ArrayList<Position<T>> pal)
-//			throws InvalidPositionException, BoundaryViolationException {
-//		
-//		if (hasLeft(p))
-//			inOrderPositions(left(p), pal);
-//		pal.add(p);
-//		if (hasRight(p))
-//			inOrderPositions(right(p), pal);
-//	}
-//	
-//	private void postOrderPositions(Position<T> p, ArrayList<Position<T>> pal)
-//			throws InvalidPositionException, BoundaryViolationException {
-//
-//		if (hasLeft(p))
-//			postOrderPositions(left(p), pal);
-//		if (hasRight(p))
-//			postOrderPositions(right(p), pal);
-//		pal.add(p);
-//	}
+
+	// private void inOrderPositions(Position<T> p, ArrayList<Position<T>> pal)
+	// throws InvalidPositionException, BoundaryViolationException {
+	//
+	// if (hasLeft(p))
+	// inOrderPositions(left(p), pal);
+	// pal.add(p);
+	// if (hasRight(p))
+	// inOrderPositions(right(p), pal);
+	// }
+	//
+	// private void postOrderPositions(Position<T> p, ArrayList<Position<T>>
+	// pal)
+	// throws InvalidPositionException, BoundaryViolationException {
+	//
+	// if (hasLeft(p))
+	// postOrderPositions(left(p), pal);
+	// if (hasRight(p))
+	// postOrderPositions(right(p), pal);
+	// pal.add(p);
+	// }
 
 	public BTPosition<T> addRoot(T ele) throws NoEmptyTreeException {
 		if (!isEmpty())
@@ -245,7 +242,5 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 		size++;
 		return newNode;
 	}
-
-
 
 }

@@ -15,15 +15,23 @@ public class Traveral_BinaryTree<T> extends LinkedBinaryTree<T> {
 		this.comp = comp;
 	}
 
+	/**
+	 * get next largest
+	 * 
+	 * @param key
+	 * @return
+	 * @throws InvalidPositionException
+	 * @throws EmptyTreeException
+	 */
+
 	public T BSTNextLargest(T key) throws InvalidPositionException,
 			EmptyTreeException {
 		return BSTNextLargestRec(key, checkPosition(root()));
 	}
 
-	
-	//seems inefficient, come up with a new one later
+	// seems inefficient, come up with a new one later
 	private T BSTNextLargestRec(T key, BTPosition<T> node) {
-		
+
 		T found = null;
 
 		if (node.getLeft() != null) {
@@ -42,6 +50,9 @@ public class Traveral_BinaryTree<T> extends LinkedBinaryTree<T> {
 
 	}
 
+	/**
+	 * pre-order traversal
+	 */
 	public void preOrderTraveral() throws EmptyTreeException,
 			InvalidPositionException {
 		System.out.print("PreOrderTraveral ");
@@ -59,6 +70,9 @@ public class Traveral_BinaryTree<T> extends LinkedBinaryTree<T> {
 		}
 	}
 
+	/**
+	 * in-order traversal
+	 */
 	public void inOrderTraveral() throws EmptyTreeException,
 			InvalidPositionException {
 		System.out.print("inOrderTraveral ");
@@ -76,6 +90,9 @@ public class Traveral_BinaryTree<T> extends LinkedBinaryTree<T> {
 		}
 	}
 
+	/**
+	 * post-order traversal
+	 */
 	public void postOrderTraveral() throws EmptyTreeException,
 			InvalidPositionException {
 		System.out.print("postOrderTraveral ");
@@ -91,6 +108,29 @@ public class Traveral_BinaryTree<T> extends LinkedBinaryTree<T> {
 			postOrderRec(BTnode.getRight());
 			System.out.print(node.element() + " ");
 		}
+	}
+
+	/**
+	 * check isBST
+	 * 
+	 * @param min
+	 * @param max
+	 */
+	public boolean isBST(T min, T max) throws InvalidPositionException {
+		return isBST(checkPosition(root), min, max);
+	}
+
+	private boolean isBST(BTPosition<T> current, T min, T max) {
+
+		if (current == null)
+			return true;
+
+		T currentV = current.element();
+		if (comp.compare(currentV, min) > 0 && comp.compare(currentV, max) < 0)
+			return isBST(current.getLeft(), min, currentV)
+					&& isBST(current.getRight(), currentV, max);
+		else
+			return false;
 	}
 
 }
