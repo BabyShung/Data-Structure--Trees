@@ -5,17 +5,18 @@ package applications;
  * 
  * Added comparator-
  * 
- * Added methods:
+ * Own methods:
  * 
  * 1.pre-order traversal
  * 2.in-order traversal
  * 3.post-order traversal
  * 4.isBST
+ * 5.treeHeight
+ * 6.treeDepth
  * 
  * 
  * 
  */
-
 
 import BinaryTree.LinkedBinaryTree;
 import Exceptions.EmptyTreeException;
@@ -24,14 +25,13 @@ import Interfaces.BTPosition;
 import Interfaces.Comparator;
 import Interfaces.Position;
 
-public class Traveral_BinaryTree<T> extends LinkedBinaryTree<T> {
+public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 
 	protected Comparator<T> comp;
 
-	public Traveral_BinaryTree(Comparator<T> comp) {
+	public AdvancedBinaryTree(Comparator<T> comp) {
 		this.comp = comp;
 	}
-
 
 	/**
 	 * pre-order traversal
@@ -96,6 +96,8 @@ public class Traveral_BinaryTree<T> extends LinkedBinaryTree<T> {
 	/**
 	 * check isBST
 	 * 
+	 * checking subtrees---space O(1), time O(n)
+	 * 
 	 * @param min
 	 * @param max
 	 */
@@ -114,6 +116,45 @@ public class Traveral_BinaryTree<T> extends LinkedBinaryTree<T> {
 					&& isBST(current.getRight(), currentV, max);
 		else
 			return false;
+
+		/**
+		 * second thought: not space O(1) 1.in-order add all the elements into
+		 * an arraylist,O(n) 2.scan through the al to check the order, then know
+		 * if is BST,O(n)
+		 */
+	}
+
+	/**
+	 * depth and height
+	 * 
+	 */
+
+	public int treeHeight(Position<T> current) throws InvalidPositionException {
+
+		BTPosition<T> currentBT = checkPosition(current);
+
+		return treeHeightRec(currentBT);
+
+	}
+
+	private int treeHeightRec(BTPosition<T> current)
+			throws InvalidPositionException {
+		if (current == null)
+			return 0;
+		return 1 + Math.max(treeHeightRec(current.getLeft()),
+				treeHeightRec(current.getRight()));
+	}
+
+	public int treeDepth(Position<T> current) throws InvalidPositionException {
+		BTPosition<T> currentBT = checkPosition(current);
+		return treeDepthRec(currentBT);
+	}
+
+	private int treeDepthRec(BTPosition<T> current)
+			throws InvalidPositionException {
+		if (current == root)
+			return 1;
+		return 1 + treeDepthRec(current.getParent());
 	}
 
 }

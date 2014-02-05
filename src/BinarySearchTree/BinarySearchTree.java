@@ -3,8 +3,8 @@ package BinarySearchTree;
 /**
  * Binary Search Tree based on linked list
  * 
- * It extends the self-defined Traveral_BinaryTree, which has all the traversals (pre,post,in order).
- * Traveral_BinaryTree extends the LinkedBinaryTree ( basic methods: getLeft,getRight,etc).
+ * It extends the self-defined AdvancedBinaryTree, which has all the traversals (pre,post,in order),etc.
+ * AdvancedBinaryTree extends the LinkedBinaryTree ( basic methods: getLeft,getRight,etc).
  * 
  * 
  * 
@@ -12,9 +12,6 @@ package BinarySearchTree;
  * 
  * 1.SearchNode, O(logN) if it is balanced
  * 2.insertNode, O(logN) if it is balanced
- * 3.getNextLargest
- * 4.treeHeight
- * 5.treeDepth
  * 
  * 
  * will improve the code and add delete method later.
@@ -24,16 +21,15 @@ package BinarySearchTree;
  * 
  */
 
-import applications.Traveral_BinaryTree;
+import applications.AdvancedBinaryTree;
 import BinaryTree.BinaryTreeNode;
-import Exceptions.EmptyTreeException;
 import Exceptions.InvalidPositionException;
 import Exceptions.NoEmptyTreeException;
 import Interfaces.BTPosition;
 import Interfaces.Comparator;
 import Interfaces.Position;
 
-public class BinarySearchTree<T> extends Traveral_BinaryTree<T> {
+public class BinarySearchTree<T> extends AdvancedBinaryTree<T> {
 
 	public BinarySearchTree(Comparator<T> comp) {
 		super(comp);
@@ -115,71 +111,6 @@ public class BinarySearchTree<T> extends Traveral_BinaryTree<T> {
 			}
 
 		}
-	}
-
-	/**
-	 * depth and height
-	 * 
-	 */
-
-	public int treeHeight(Position<T> current) throws InvalidPositionException {
-
-		BTPosition<T> currentBT = checkPosition(current);
-
-		return treeHeightRec(currentBT);
-
-	}
-
-	private int treeHeightRec(BTPosition<T> current)
-			throws InvalidPositionException {
-		if (current == null)
-			return 0;
-		return 1 + Math.max(treeHeightRec(current.getLeft()),
-				treeHeightRec(current.getRight()));
-	}
-
-	public int treeDepth(Position<T> current) throws InvalidPositionException {
-		BTPosition<T> currentBT = checkPosition(current);
-		return treeDepthRec(currentBT);
-	}
-
-	private int treeDepthRec(BTPosition<T> current)
-			throws InvalidPositionException {
-		if (current == root)
-			return 1;
-		return 1 + treeDepthRec(current.getParent());
-	}
-
-	/**
-	 * get next largest
-	 * 
-	 * @param key
-	 */
-
-	public T NextLargest(T key) throws InvalidPositionException,
-			EmptyTreeException {
-		return NextLargestRec(key, checkPosition(root()));
-	}
-
-	// seems inefficient, come up with a new one later
-	private T NextLargestRec(T key, BTPosition<T> node) {
-
-		T found = null;
-
-		if (node.getLeft() != null) {
-			found = NextLargestRec(key, node.getLeft());
-		}
-
-		if (comp.compare(node.element(), key) > 0 && found == null) {
-			found = node.element();
-		}
-
-		if (node.getRight() != null && found == null) {
-			found = NextLargestRec(key, node.getRight());
-		}
-
-		return found;
-
 	}
 
 }

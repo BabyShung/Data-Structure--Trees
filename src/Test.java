@@ -1,6 +1,5 @@
 import java.security.InvalidKeyException;
 
-import BinarySearchTree.BinarySearchTree;
 import Exceptions.BoundaryViolationException;
 import Exceptions.EmptyTreeException;
 import Exceptions.InvalidPositionException;
@@ -8,7 +7,8 @@ import Exceptions.NoEmptyTreeException;
 import Interfaces.BTPosition;
 import Interfaces.Comparator;
 import Interfaces.Position;
-import applications.Traveral_BinaryTree;
+import applications.AdvancedBinarySearchTree;
+import applications.AdvancedBinaryTree;
 
 public class Test {
 
@@ -42,7 +42,7 @@ public class Test {
 		// }
 
 		// test binary tree
-		Traveral_BinaryTree<Integer> tbt = new Traveral_BinaryTree<>(
+		AdvancedBinaryTree<Integer> tbt = new AdvancedBinaryTree<>(
 				new Comparator<Integer>() {
 
 					@Override
@@ -77,7 +77,7 @@ public class Test {
 		System.out.println("isBST: "
 				+ tbt.isBST(Integer.MIN_VALUE, Integer.MAX_VALUE));
 
-		BinarySearchTree<Integer> bst = new BinarySearchTree<>(
+		AdvancedBinarySearchTree<Integer> bst = new AdvancedBinarySearchTree<>(
 				new Comparator<Integer>() {
 
 					@Override
@@ -110,6 +110,9 @@ public class Test {
 
 		System.out.println("isBST: "
 				+ bst.isBST(Integer.MIN_VALUE, Integer.MAX_VALUE));
+		
+		System.out.println("LCA: "
+				+ bst.lowestCommonAncestor(bst.root(), 9, 3));
 
 	}
 
