@@ -1,6 +1,5 @@
 package GeneralTrees;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
@@ -11,6 +10,7 @@ import Interfaces.Position;
 import Interfaces.Tree;
 
 public class GeneralTree<T> implements Tree<T> {
+	
 	private GeneralTreeNode<T> root;
 	private int size;
 
@@ -123,7 +123,6 @@ public class GeneralTree<T> implements Tree<T> {
 			if (!hasNext()) {
 				throw new NoSuchElementException();
 			}
-
 			return OutputQueue.poll();
 		}
 

@@ -14,9 +14,15 @@ package applications;
  * 5.treeHeight
  * 6.treeDepth
  * 7.KDistanceFromRoot
- * 
+ * 8.BFS iterator
+ * 9.DFS iterator
  * 
  */
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 
 import BinaryTree.LinkedBinaryTree;
 import Exceptions.EmptyTreeException;
@@ -144,7 +150,8 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 		return 1 + Math.max(treeHeightRec(current.getLeft()),
 				treeHeightRec(current.getRight()));
 	}
-	//-----depth
+
+	// -----depth
 	public int treeDepth(Position<T> current) throws InvalidPositionException {
 		BTPosition<T> currentBT = checkPosition(current);
 		return treeDepthRec(currentBT);
@@ -159,34 +166,120 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 
 	/**
 	 * k distance from root
-	 * @throws InvalidPositionException 
+	 * 
+	 * @throws InvalidPositionException
 	 */
-	public void KDistanceFromRoot(int k) throws InvalidPositionException{
-		
+	public void KDistanceFromRoot(int k) throws InvalidPositionException {
+
 		BTPosition<T> BTRoot = checkPosition(root);
-		KDistanceFromRootRec(BTRoot,k);
+		KDistanceFromRootRec(BTRoot, k);
 	}
 
 	private void KDistanceFromRootRec(BTPosition<T> current, int k) {
 
-		if(current == null)
+		if (current == null)
 			return;
-		if(k == 0){
+		if (k == 0) {
 			System.out.println("find one at " + current.element());
+		} else {
+			KDistanceFromRootRec(current.getLeft(), k - 1);// note: can't use
+															// --k here, it will
+															// affect the blow
+															// line's k
+			KDistanceFromRootRec(current.getRight(), k - 1);
 		}
-		else{
-			KDistanceFromRootRec(current.getLeft(),k-1);//note: can't use --k here, it will affect the blow line's k
-			KDistanceFromRootRec(current.getRight(),k-1);
-		}
-		
+
 		/**
 		 * second thought: use BFS to get them
 		 */
-		
-		
+
 		/**
-		 * follow up
-		 * start from any node, get k distance?
+		 * follow up start from any node, get k distance?
 		 */
+	}
+
+	
+	/**
+	 * BFS and DFS, *** important!!
+	 * 
+	 * Follow up
+	 * -------write BFS and DFS not in iterator class
+	 */
+	
+	@Override
+	public Iterator<Position<T>> iterator() {
+		// return new BFSIterator();
+		return new DFSIterator();
+	}
+
+	private class BFSIterator implements Iterator<Position<T>> {
+
+		Queue<BTPosition<T>> queue;
+
+		public BFSIterator() {
+			queue = new LinkedList<BTPosition<T>>();
+			queue.add(root);
+		}
+
+		@Override
+		public boolean hasNext() {
+			return !queue.isEmpty();
+		}
+
+		@Override
+		public Position<T> next() {
+			if (!hasNext()) {
+				throw new Error("No more elements!");
+			}
+			BTPosition<T> current = queue.poll();// poll get the head node
+			if (current.getLeft() != null)
+				queue.add(current.getLeft());
+			if (current.getRight() != null)
+				queue.add(current.getRight());
+			return current;
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException(
+					"Cannot remove from tree iterator.");
+		}
+
+	}
+
+	private class DFSIterator implements Iterator<Position<T>> {
+
+		Stack<BTPosition<T>> stack;
+
+		public DFSIterator() {
+			stack = new Stack<BTPosition<T>>();
+			stack.push(root);
+		}
+
+		@Override
+		public boolean hasNext() {
+			return !stack.isEmpty();
+		}
+
+		@Override
+		public Position<T> next() {
+			if (!hasNext()) {
+				throw new Error("No more elements!");
+			}
+			BTPosition<T> current = stack.pop();
+			if (current.getLeft() != null)
+				stack.push(current.getRight()); // add right first, if you wanna
+												// scan left path first
+			if (current.getRight() != null)
+				stack.push(current.getLeft());
+			return current;
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException(
+					"Cannot remove from tree iterator.");
+		}
+
 	}
 }

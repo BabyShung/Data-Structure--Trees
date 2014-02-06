@@ -1,12 +1,8 @@
 package Interfaces;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import Exceptions.BoundaryViolationException;
 import Exceptions.EmptyTreeException;
 import Exceptions.InvalidPositionException;
-import GeneralTrees.GeneralTreeNode;
 
 public interface Tree<T> extends Iterable<Position<T>> {
 

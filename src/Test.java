@@ -74,7 +74,11 @@ public class Test {
 		tbt.preOrderTraveral();
 		tbt.inOrderTraveral();
 		tbt.postOrderTraveral();
-
+		System.out.println("B or D FS:");
+		for(Position<Integer> tmp : tbt){
+			System.out.print(tmp+" ");
+		}
+		System.out.println();
 		System.out.println("isBST: "
 				+ tbt.isBST(Integer.MIN_VALUE, Integer.MAX_VALUE));
 
