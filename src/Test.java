@@ -4,6 +4,7 @@ import Exceptions.BoundaryViolationException;
 import Exceptions.EmptyTreeException;
 import Exceptions.InvalidPositionException;
 import Exceptions.NoEmptyTreeException;
+import Heap.ArrayHeap;
 import Interfaces.BTPosition;
 import Interfaces.Comparator;
 import Interfaces.Position;
@@ -116,6 +117,30 @@ public class Test {
 		
 		bst.KDistanceFromRoot(2);
 
+		
+		ArrayHeap<Integer> ah = new ArrayHeap<>(new Comparator<Integer>() {
+
+			@Override
+			public int compare(Integer a, Integer b) {
+				if (a < b)
+					return -1;
+				else if (a > b)
+					return 1;
+				else
+					return 0;
+			}
+		});
+		
+		ah.insert(5);
+		ah.insert(4);
+		ah.insert(11);
+		ah.insert(9);
+		ah.insert(8);
+		ah.insert(2);
+		ah.insert(55);
+		ah.insert(24);
+		ah.insert(1);
+		ah.print();
 	}
 
 }

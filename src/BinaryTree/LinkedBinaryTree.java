@@ -111,13 +111,10 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 		try {
 			ps = positions();
 		} catch (InvalidPositionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BoundaryViolationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (EmptyTreeException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return ps.iterator();
