@@ -63,6 +63,7 @@ public class AdvancedBinarySearchTree<T> extends BinarySearchTree<T> {
 
 	public BTPosition<T> lowestCommonAncestor(Position<T> root, T a, T b)
 			throws InvalidPositionException {
+		
 		BTPosition<T> BTroot = checkPosition(root);
 		while (BTroot != null) {
 

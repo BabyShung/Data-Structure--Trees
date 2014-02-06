@@ -13,7 +13,7 @@ package applications;
  * 4.isBST
  * 5.treeHeight
  * 6.treeDepth
- * 
+ * 7.KDistanceFromRoot
  * 
  * 
  */
@@ -144,7 +144,7 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 		return 1 + Math.max(treeHeightRec(current.getLeft()),
 				treeHeightRec(current.getRight()));
 	}
-
+	//-----depth
 	public int treeDepth(Position<T> current) throws InvalidPositionException {
 		BTPosition<T> currentBT = checkPosition(current);
 		return treeDepthRec(currentBT);
@@ -157,4 +157,36 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 		return 1 + treeDepthRec(current.getParent());
 	}
 
+	/**
+	 * k distance from root
+	 * @throws InvalidPositionException 
+	 */
+	public void KDistanceFromRoot(int k) throws InvalidPositionException{
+		
+		BTPosition<T> BTRoot = checkPosition(root);
+		KDistanceFromRootRec(BTRoot,k);
+	}
+
+	private void KDistanceFromRootRec(BTPosition<T> current, int k) {
+
+		if(current == null)
+			return;
+		if(k == 0){
+			System.out.println("find one at " + current.element());
+		}
+		else{
+			KDistanceFromRootRec(current.getLeft(),k-1);//note: can't use --k here, it will affect the blow line's k
+			KDistanceFromRootRec(current.getRight(),k-1);
+		}
+		
+		/**
+		 * second thought: use BFS to get them
+		 */
+		
+		
+		/**
+		 * follow up
+		 * start from any node, get k distance?
+		 */
+	}
 }

@@ -113,6 +113,8 @@ public class Test {
 		
 		System.out.println("LCA: "
 				+ bst.lowestCommonAncestor(bst.root(), 9, 3));
+		
+		bst.KDistanceFromRoot(2);
 
 	}
 
