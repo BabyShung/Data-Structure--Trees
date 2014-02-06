@@ -103,9 +103,9 @@ public class ArrayHeap<T> implements Heap<T> {
 		return true;
 	}
 
-	// printing helper
-	public void print() {
-		System.out.print("ArrayHeap: ");
+	// printing helper, actually this method should be in ArrayBinaryTree(not implemented)
+	public void print(String dataStructure) {
+		System.out.print(dataStructure + ": ");
 		for (int i = 0; i < size; i++)
 			if (heap.get(i) != null)
 				System.out.print(heap.get(i).element() + " ");
@@ -121,9 +121,10 @@ public class ArrayHeap<T> implements Heap<T> {
 		System.out.println(dots + dots);
 
 		while (size > 0) {
-			if (column == 0)
+			if (column == 0) {
 				for (int k = 0; k < nBlanks; k++)
 					System.out.print(" ");
+			}
 			System.out.print(heap.get(j).element());
 			if (++j == size)
 				break;
@@ -133,7 +134,7 @@ public class ArrayHeap<T> implements Heap<T> {
 				column = 0;
 				System.out.println();
 			} else {
-				for (int k = 0; k < nBlanks * 2 - 2; k++)
+				for (int k = 0; k < nBlanks * 2; k++)
 					System.out.print(" ");
 			}
 

@@ -25,23 +25,6 @@ public class Test {
 			NoEmptyTreeException, InvalidKeyException,
 			BoundaryViolationException, EmptyTreeException {
 
-		// test iterator
-		// LinkedBinaryTree<Object> tbt = new LinkedBinaryTree<>();
-		// Position<Object> root, left, right;
-		// root = tbt.addRoot(5);
-		// left = tbt.insertLeft(root, 4);
-		// right = tbt.insertRight(root, 3);
-		//
-		// left = tbt.insertLeft(left, 2);
-		// left = tbt.insertRight(left, 1);
-		//
-		// right = tbt.insertLeft(right, 6);
-		// right = tbt.insertRight(right, 7);
-		//
-		// for (Position<Object> tmp : tbt) {
-		// System.out.print(tmp.element() + " ");
-		// }
-
 		// test binary tree
 		AdvancedBinaryTree<Integer> tbt = new AdvancedBinaryTree<>(
 				new Comparator<Integer>() {
@@ -66,19 +49,18 @@ public class Test {
 		tbt.insertRight(left, 4);
 		tbt.insertLeft(right, 6);
 		tbt.insertRight(right, 9);
-		for (Position<Integer> tmp : tbt) {
-			System.out.print(tmp.element() + " ");
-		}
-		System.out.println();
 
 		tbt.preOrderTraveral();
 		tbt.inOrderTraveral();
 		tbt.postOrderTraveral();
 		System.out.println("B or D FS:");
-		for(Position<Integer> tmp : tbt){
-			System.out.print(tmp+" ");
+		for (Position<Integer> tmp : tbt) {// self iterator,overrided super
+											// class
+			System.out.print(tmp + " ");
 		}
 		System.out.println();
+
+		tbt.print("Binary Tree");
 		System.out.println("isBST: "
 				+ tbt.isBST(Integer.MIN_VALUE, Integer.MAX_VALUE));
 
@@ -107,6 +89,7 @@ public class Test {
 		// bst.inOrderTraveral();
 		// bst.preOrderTraveral();
 		// bst.postOrderTraveral();
+		// bst.print("Binary Search Tree"); // work only for full BT, need overriding
 
 		System.out.println("root tree height: " + bst.treeHeight(bst.root()));
 		System.out.println("root tree depth: " + bst.treeDepth(bst.root()));
@@ -115,13 +98,12 @@ public class Test {
 
 		System.out.println("isBST: "
 				+ bst.isBST(Integer.MIN_VALUE, Integer.MAX_VALUE));
-		
-		System.out.println("LCA: "
-				+ bst.lowestCommonAncestor(bst.root(), 9, 3));
-		
+
+		System.out
+				.println("LCA: " + bst.lowestCommonAncestor(bst.root(), 9, 3));
+
 		bst.KDistanceFromRoot(2);
 
-		
 		ArrayHeap<Integer> ah = new ArrayHeap<>(new Comparator<Integer>() {
 
 			@Override
@@ -134,7 +116,7 @@ public class Test {
 					return 0;
 			}
 		});
-		
+
 		ah.insert(5);
 		ah.insert(4);
 		ah.insert(11);
@@ -144,7 +126,7 @@ public class Test {
 		ah.insert(55);
 		ah.insert(24);
 		ah.insert(1);
-		ah.print();
+		ah.print("ArrayHeap");
 	}
 
 }
