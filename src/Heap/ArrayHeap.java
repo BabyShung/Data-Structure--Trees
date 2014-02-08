@@ -3,6 +3,17 @@ package Heap;
 /**
  *  Max heap
  * 
+ * Own methods:
+ * 
+ * 1.buildHeap O(n), using postOrder
+ * 2.heapSort O(nlogn), remove n elements at top, each time O(logn)
+ * 3.insert
+ * 4.remove
+ * 5.trickleUp (combined with insert)
+ * 6.trickleDown (combined with remove)
+ * 7.replace (combined with 5 and 6)
+ * 
+ * 
  * @author haozheng
  * 
  */
@@ -42,7 +53,7 @@ public class ArrayHeap<T> implements Heap<T> {
 		}
 	}
 
-	private void buildHeap(int index) {
+	private void buildHeap(int index) {// using postOrder
 		if (index + 1 > size)
 			return;
 		buildHeap(2 * index + 1);
@@ -51,7 +62,7 @@ public class ArrayHeap<T> implements Heap<T> {
 	}
 
 	public void heapSort() { // decreasing order, since this is maxHeap
-		for (int i = 0; i < heap.size(); i++){
+		for (int i = 0; i < heap.size(); i++) {
 			BTPosition<T> tmp = remove();
 
 			System.out.println("Removed: " + tmp.element());
