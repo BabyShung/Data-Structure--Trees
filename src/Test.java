@@ -1,10 +1,12 @@
 import java.security.InvalidKeyException;
+import java.util.ArrayList;
 
 import Exceptions.BoundaryViolationException;
 import Exceptions.EmptyTreeException;
 import Exceptions.InvalidPositionException;
 import Exceptions.NoEmptyTreeException;
 import Heap.ArrayHeap;
+import Heap.HeapNode;
 import Interfaces.BTPosition;
 import Interfaces.Comparator;
 import Interfaces.Position;
@@ -127,6 +129,31 @@ public class Test {
 		ah.insert(24);
 		ah.insert(1);
 		ah.print("ArrayHeap");
+		
+		ah.heapSort();
+		
+		ArrayList<BTPosition<Integer>> albt = new ArrayList<>();
+		albt.add(new HeapNode<Integer>(10,0,albt));
+		albt.add(new HeapNode<Integer>(4,1,albt));
+		albt.add(new HeapNode<Integer>(18,2,albt));
+		albt.add(new HeapNode<Integer>(7,3,albt));
+		albt.add(new HeapNode<Integer>(23,4,albt));
+		albt.add(new HeapNode<Integer>(30,5,albt));
+		
+		ArrayHeap<Integer> ahb = new ArrayHeap<>(new Comparator<Integer>() {
+
+			@Override
+			public int compare(Integer a, Integer b) {
+				if (a < b)
+					return -1;
+				else if (a > b)
+					return 1;
+				else
+					return 0;
+			}
+		},albt);
+		ahb.print("BuildUp Heap");
+		ahb.heapSort();
 	}
 
 }

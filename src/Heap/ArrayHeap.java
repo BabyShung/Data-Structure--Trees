@@ -27,6 +27,37 @@ public class ArrayHeap<T> implements Heap<T> {
 		heap = new ArrayList<>();
 	}
 
+	public ArrayHeap(Comparator<T> comp, ArrayList<BTPosition<T>> unsorted) {
+		this.comp = comp;
+		if (unsorted == null)
+			heap = new ArrayList<>();
+		else {
+
+			heap = unsorted;
+			size = heap.size();
+			buildHeap(0); // build heap from a unsorted datastructure,
+							// O(n). and actually I should put root as input.
+							// but I didn't implement binary tree, sad
+
+		}
+	}
+
+	private void buildHeap(int index) {
+		if (index + 1 > size)
+			return;
+		buildHeap(2 * index + 1);
+		buildHeap(2 * index + 2);
+		trickleDown(index);
+	}
+
+	public void heapSort() { // decreasing order, since this is maxHeap
+		for (int i = 0; i < heap.size(); i++){
+			BTPosition<T> tmp = remove();
+
+			System.out.println("Removed: " + tmp.element());
+		}
+	}
+
 	@Override
 	public boolean isEmpty() {
 		return size == 0;
@@ -34,7 +65,7 @@ public class ArrayHeap<T> implements Heap<T> {
 
 	@Override
 	public void insert(T element) {
-
+		// this constructor is bad, need redesign heapnode
 		BTPosition<T> newNode = new HeapNode<T>(element, size, heap);
 		heap.add(newNode);
 		trickleUp(size++);
@@ -42,9 +73,11 @@ public class ArrayHeap<T> implements Heap<T> {
 
 	@Override
 	public BTPosition<T> remove() { // remove the max key
+
 		BTPosition<T> root = heap.get(0);
 		heap.set(0, heap.get(size - 1)); // put the last to root
 		trickleDown(0);
+		size--;
 		return root;
 	}
 
@@ -65,7 +98,6 @@ public class ArrayHeap<T> implements Heap<T> {
 	private void trickleDown(int index) {
 		int largerChild;
 		BTPosition<T> top = heap.get(index);
-
 		while (index < size / 2) {
 
 			int leftChild = 2 * index + 1;
@@ -84,6 +116,7 @@ public class ArrayHeap<T> implements Heap<T> {
 
 			heap.set(index, heap.get(largerChild));
 			index = largerChild;
+
 		}
 		heap.set(index, top); // put old root to index
 	}
@@ -103,7 +136,8 @@ public class ArrayHeap<T> implements Heap<T> {
 		return true;
 	}
 
-	// printing helper, actually this method should be in ArrayBinaryTree(not implemented)
+	// printing helper, actually this method should be in ArrayBinaryTree(not
+	// implemented)
 	public void print(String dataStructure) {
 		System.out.print(dataStructure + ": ");
 		for (int i = 0; i < size; i++)

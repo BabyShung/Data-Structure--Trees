@@ -15,10 +15,9 @@ public class HeapNode<T> implements BTPosition<T> {
 		this.index = index;
 		this.container = container;
 	}
-
+	
 	@Override
 	public T element() {
-		// TODO Auto-generated method stub
 		return element;
 	}
 
@@ -40,7 +39,6 @@ public class HeapNode<T> implements BTPosition<T> {
 	@Override
 	public void setLeft(BTPosition<T> p) {
 		container.set(2 * index + 1, p);
-
 	}
 
 	@Override
