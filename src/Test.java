@@ -62,7 +62,6 @@ public class Test {
 		}
 		System.out.println();
 
-		tbt.print("Binary Tree");
 		System.out.println("isBST: "
 				+ tbt.isBST(Integer.MIN_VALUE, Integer.MAX_VALUE));
 

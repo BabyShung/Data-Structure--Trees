@@ -285,44 +285,44 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 	}
 
 	// print helper
-	public void print(String dataStructure) {
-		System.out.print(dataStructure + ": ");
-
-		Iterator<Position<T>> bfs = new BFSIterator();
-
-		while (bfs.hasNext())
-			System.out.print(bfs.next() + " ");
-
-		System.out.println();
-
-		int nBlanks = 32;
-		int itemsPerRow = 1;
-		int column = 0;
-		String dots = "................................";
-		System.out.println(dots + dots);
-
-		bfs = new BFSIterator();
-		while (size > 0) {
-			if (column == 0) {
-				for (int k = 0; k < nBlanks; k++)
-					System.out.print(" ");
-			}
-			System.out.print(bfs.next());
-			if (!bfs.hasNext())
-				break;
-			if (++column == itemsPerRow) {
-				nBlanks /= 2;
-				itemsPerRow *= 2;
-				column = 0;
-				System.out.println();
-			} else {
-				for (int k = 0; k < nBlanks * 2; k++)
-					System.out.print(" ");
-			}
-
-		}
-		System.out.println();
-		System.out.println(dots + dots);
-	}
+//	public void print(String dataStructure) {
+//		System.out.print(dataStructure + ": ");
+//
+//		Iterator<Position<T>> bfs = new BFSIterator();
+//
+//		while (bfs.hasNext())
+//			System.out.print(bfs.next() + " ");
+//
+//		System.out.println();
+//
+//		int nBlanks = 32;
+//		int itemsPerRow = 1;
+//		int column = 0;
+//		String dots = "................................";
+//		System.out.println(dots + dots);
+//
+//		bfs = new BFSIterator();
+//		while (size > 0) {
+//			if (column == 0) {
+//				for (int k = 0; k < nBlanks; k++)
+//					System.out.print(" ");
+//			}
+//			System.out.print(bfs.next());
+//			if (!bfs.hasNext())
+//				break;
+//			if (++column == itemsPerRow) {
+//				nBlanks /= 2;
+//				itemsPerRow *= 2;
+//				column = 0;
+//				System.out.println();
+//			} else {
+//				for (int k = 0; k < nBlanks * 2; k++)
+//					System.out.print(" ");
+//			}
+//
+//		}
+//		System.out.println();
+//		System.out.println(dots + dots);
+//	}
 
 }
