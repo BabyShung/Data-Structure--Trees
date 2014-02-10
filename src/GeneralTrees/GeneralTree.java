@@ -1,5 +1,14 @@
 package GeneralTrees;
 
+/**
+ * This is the general tree, sort of complex
+ * implements the tree interface
+ * 
+ * And the tree interface extends the iterator interface
+ * Important use of BFS and DFS
+ * 
+ */
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
@@ -10,7 +19,7 @@ import Interfaces.Position;
 import Interfaces.Tree;
 
 public class GeneralTree<T> implements Tree<T> {
-	
+
 	private GeneralTreeNode<T> root;
 	private int size;
 
@@ -22,6 +31,11 @@ public class GeneralTree<T> implements Tree<T> {
 	@Override
 	public Position<T> root() {
 		return root;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return size == 0;
 	}
 
 	@Override
@@ -54,14 +68,14 @@ public class GeneralTree<T> implements Tree<T> {
 		return pos == root;
 	}
 
-	//add child
+	// add child
 	public Position<T> addChild(Position<T> parent, T element) {
 		size++;
 		return castPositionToNode(parent).addChild(
-				new GeneralTreeNode<T>(element, castPositionToNode(parent), this));
+				new GeneralTreeNode<T>(element, castPositionToNode(parent),
+						this));
 	}
-	
-	
+
 	// This private method is used to see if a given position is a member of
 	// this particular tree. It first checks to make sure 'pos' is of type
 	// TreeNode, and if it is, checks to see if its tree reference is to this
@@ -264,14 +278,5 @@ public class GeneralTree<T> implements Tree<T> {
 					"Cannot remove from tree iterator.");
 		}
 	}
-
-	@Override
-	public boolean isEmpty() {
-		return size == 0;
-	}
-
-	// public ArrayList<GeneralTree<T>> TreeGetChildren(Position<T> pos) {
-	// return castPositionToNode(pos).getDirectChilrean();
-	// }
 
 }
