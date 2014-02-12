@@ -112,11 +112,8 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 	 * @param min
 	 * @param max
 	 */
-	public boolean isBST(T min, T max) throws InvalidPositionException {
-		return isBST(checkPosition(root), min, max);
-	}
 
-	private boolean isBST(BTPosition<T> current, T min, T max) {
+	public boolean isBST(BTPosition<T> current, T min, T max) {
 
 		if (current == null)
 			return true;
@@ -132,6 +129,8 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 		 * second thought: not space O(1) 1.in-order add all the elements into
 		 * an arraylist,O(n) 2.scan through the al to check the order, then know
 		 * if is BST,O(n)
+		 * Actually, not need for a whole al, just track the last one.
+		 * In java, we can either use static var or wrapIn class
 		 */
 	}
 
