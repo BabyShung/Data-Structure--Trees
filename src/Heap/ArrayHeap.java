@@ -38,13 +38,13 @@ public class ArrayHeap<T> implements Heap<T> {
 		heap = new ArrayList<>();
 	}
 
-	public ArrayHeap(Comparator<T> comp, ArrayList<BTPosition<T>> unsorted) {
+	public ArrayHeap(Comparator<T> comp, ArrayList<BTPosition<T>> arraylist) {
 		this.comp = comp;
-		if (unsorted == null)
+		if (arraylist == null)
 			heap = new ArrayList<>();
 		else {
 
-			heap = unsorted;
+			heap = arraylist;
 			size = heap.size();
 			buildHeap(0); // build heap from a unsorted datastructure,
 							// O(n). and actually I should put root as input.

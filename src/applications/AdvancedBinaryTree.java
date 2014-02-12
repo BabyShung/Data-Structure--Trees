@@ -16,6 +16,8 @@ package applications;
  * 7.KDistanceFromRoot
  * 8.BFS iterator
  * 9.DFS iterator
+ * 10.isBalanced -- a modification of treeHeight O(n), niubility
+ * 
  * 
  * Helpers:
  * 1.print
@@ -138,33 +140,18 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 	 * 
 	 */
 
-	public int treeHeight(Position<T> current) throws InvalidPositionException {
-
-		BTPosition<T> currentBT = checkPosition(current);
-
-		return treeHeightRec(currentBT);
-
-	}
-
-	private int treeHeightRec(BTPosition<T> current)
+	public int treeHeight(BTPosition<T> current)
 			throws InvalidPositionException {
 		if (current == null)
 			return 0;
-		return 1 + Math.max(treeHeightRec(current.getLeft()),
-				treeHeightRec(current.getRight()));
+		return 1 + Math.max(treeHeight(current.getLeft()),
+				treeHeight(current.getRight()));
 	}
 
-	// -----depth
-	public int treeDepth(Position<T> current) throws InvalidPositionException {
-		BTPosition<T> currentBT = checkPosition(current);
-		return treeDepthRec(currentBT);
-	}
-
-	private int treeDepthRec(BTPosition<T> current)
-			throws InvalidPositionException {
+	public int treeDepth(BTPosition<T> current) throws InvalidPositionException {
 		if (current == root)
 			return 1;
-		return 1 + treeDepthRec(current.getParent());
+		return 1 + treeDepth(current.getParent());
 	}
 
 	/**
@@ -268,10 +255,10 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 				throw new Error("No more elements!");
 			}
 			BTPosition<T> current = stack.pop();
-			if (current.getLeft() != null)
+			if (current.getRight() != null)
 				stack.push(current.getRight()); // add right first, if you wanna
 												// scan left path first
-			if (current.getRight() != null)
+			if (current.getLeft() != null)
 				stack.push(current.getLeft());
 			return current;
 		}
@@ -285,44 +272,89 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 	}
 
 	// print helper
-//	public void print(String dataStructure) {
-//		System.out.print(dataStructure + ": ");
-//
-//		Iterator<Position<T>> bfs = new BFSIterator();
-//
-//		while (bfs.hasNext())
-//			System.out.print(bfs.next() + " ");
-//
-//		System.out.println();
-//
-//		int nBlanks = 32;
-//		int itemsPerRow = 1;
-//		int column = 0;
-//		String dots = "................................";
-//		System.out.println(dots + dots);
-//
-//		bfs = new BFSIterator();
-//		while (size > 0) {
-//			if (column == 0) {
-//				for (int k = 0; k < nBlanks; k++)
-//					System.out.print(" ");
-//			}
-//			System.out.print(bfs.next());
-//			if (!bfs.hasNext())
-//				break;
-//			if (++column == itemsPerRow) {
-//				nBlanks /= 2;
-//				itemsPerRow *= 2;
-//				column = 0;
-//				System.out.println();
-//			} else {
-//				for (int k = 0; k < nBlanks * 2; k++)
-//					System.out.print(" ");
-//			}
-//
-//		}
-//		System.out.println();
-//		System.out.println(dots + dots);
-//	}
+	// public void print(String dataStructure) {
+	// System.out.print(dataStructure + ": ");
+	//
+	// Iterator<Position<T>> bfs = new BFSIterator();
+	//
+	// while (bfs.hasNext())
+	// System.out.print(bfs.next() + " ");
+	//
+	// System.out.println();
+	//
+	// int nBlanks = 32;
+	// int itemsPerRow = 1;
+	// int column = 0;
+	// String dots = "................................";
+	// System.out.println(dots + dots);
+	//
+	// bfs = new BFSIterator();
+	// while (size > 0) {
+	// if (column == 0) {
+	// for (int k = 0; k < nBlanks; k++)
+	// System.out.print(" ");
+	// }
+	// System.out.print(bfs.next());
+	// if (!bfs.hasNext())
+	// break;
+	// if (++column == itemsPerRow) {
+	// nBlanks /= 2;
+	// itemsPerRow *= 2;
+	// column = 0;
+	// System.out.println();
+	// } else {
+	// for (int k = 0; k < nBlanks * 2; k++)
+	// System.out.print(" ");
+	// }
+	//
+	// }
+	// System.out.println();
+	// System.out.println(dots + dots);
+	// }
 
+	/**
+	 * not efficient, O(n^2)
+	 */
+
+	public boolean isBalanced(BTPosition<T> current) {
+		if (checkHeight(current) == -1)
+			return false;
+		else
+			return true;
+	}
+
+	private int checkHeight(BTPosition<T> current) {
+		if (current == null)
+			return 0;
+
+		int leftH = checkHeight(current.getLeft());
+		if (leftH == -1)
+			return -1;
+		int rightH = checkHeight(current.getRight());
+		if (rightH == -1)
+			return -1;
+
+		int diff = leftH - rightH;
+
+		if (Math.abs(diff) > 1)
+			return -1;
+		else
+			return Math.max(leftH, rightH) + 1;
+
+	}
+
+	public boolean isBalanced2(BTPosition<T> current)
+			throws InvalidPositionException {
+		if (current == null)
+			return true;
+
+		int diff = treeHeight(current.getLeft())
+				- treeHeight(current.getRight());
+
+		if (Math.abs(diff) > 1)
+			return false;
+		else
+			return isBalanced(current.getLeft())
+					&& isBalanced(current.getRight());
+	}
 }

@@ -159,7 +159,7 @@ public class LinkedBinaryTree<T> implements BinaryTree<T> {
 	}
 
 	// own methods
-	protected BTPosition<T> checkPosition(Position<T> p)
+	public BTPosition<T> checkPosition(Position<T> p)
 			throws InvalidPositionException {
 		if (p == null || !(p instanceof BTPosition)) {
 			throw new InvalidPositionException("Position is invalid");
