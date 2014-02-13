@@ -24,6 +24,7 @@ package applications;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -270,6 +271,43 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 
 	}
 
+	public ArrayList<BTPosition<T>> BFS(){
+		LinkedList<BTPosition<T>> ll = new LinkedList<>();
+		ll.add(root);
+		ArrayList<BTPosition<T>> al = new ArrayList<>();
+		buildQueue(ll,al);
+		return al;
+	}
+	private void buildQueue(LinkedList<BTPosition<T>> ll, ArrayList<BTPosition<T>> al) {
+		BTPosition<T> c;
+		while(!ll.isEmpty()){
+			c = ll.poll();
+			if(c.getLeft()!=null)
+				ll.add(c.getLeft());
+			if(c.getRight()!=null)
+				ll.add(c.getRight());
+			al.add(c);
+		}
+	}
+	public ArrayList<BTPosition<T>> DFS(){
+		Stack<BTPosition<T>> s = new Stack<>();
+		s.add(root);
+		ArrayList<BTPosition<T>> al = new ArrayList<>();
+		buildStack(s,al);
+		return al;
+	}
+	private void buildStack(Stack<BTPosition<T>> s, ArrayList<BTPosition<T>> al) {
+		BTPosition<T> c;
+		while(!s.isEmpty()){
+			c = s.pop();
+			//let right first
+			if(c.getRight()!=null)
+				s.push(c.getRight());
+			if(c.getLeft()!=null)
+				s.push(c.getLeft());
+			al.add(c);
+		}
+	}
 	// print helper
 	// public void print(String dataStructure) {
 	// System.out.print(dataStructure + ": ");
@@ -311,6 +349,8 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 	// System.out.println(dots + dots);
 	// }
 
+
+
 	/**
 	 * not efficient, O(n^2)
 	 */
@@ -338,7 +378,7 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 		if (Math.abs(diff) > 1)
 			return -1;
 		else
-			return Math.max(leftH, rightH) + 1;
+			return Math.max(leftH, rightH) + 1;//subtree+currentNode's height
 
 	}
 

@@ -64,7 +64,18 @@ public class Test {
 			System.out.print(tmp + " ");
 		}
 		System.out.println();
-
+		System.out.print("--BFS: ");
+		ArrayList<BTPosition<Integer>> albfs = tbt.BFS();
+		for(BTPosition<Integer> bt : albfs){
+			System.out.print(bt.element()+" ");
+		}
+		System.out.println();
+		System.out.print("--DFS: ");
+		ArrayList<BTPosition<Integer>> aldfs = tbt.DFS();
+		for(BTPosition<Integer> bt : aldfs){
+			System.out.print(bt.element()+" ");
+		}
+		System.out.println();
 		System.out.println("isBST: "
 				+ tbt.isBST(btRoot, Integer.MIN_VALUE, Integer.MAX_VALUE));
 		System.out.println("isBalanced: " + tbt.isBalanced(btRoot));
