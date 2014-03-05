@@ -111,6 +111,10 @@ public class Test {
 
 		BTPosition<Integer> bstRoot = bst.checkPosition(bst.root());
 
+		System.out.println("max element: " + bst.getMax(bstRoot).element());
+		System.out.println("2nd max element: " + bst.getSecondMax(bstRoot).element());
+		
+		
 		System.out.println("root tree height: " + bst.treeHeight(bstRoot));
 		System.out.println("root tree depth: " + bst.treeDepth(bstRoot));
 

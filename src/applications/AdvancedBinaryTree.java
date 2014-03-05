@@ -129,9 +129,12 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 		/**
 		 * second thought: not space O(1) 1.in-order add all the elements into
 		 * an arraylist,O(n) 2.scan through the al to check the order, then know
-		 * if is BST,O(n)
-		 * Actually, not need for a whole al, just track the last one.
-		 * In java, we can either use static var or wrapIn class
+		 * if is BST,O(n) Actually, not need for a whole al, just track the last
+		 * one. In java, we can either use static var or wrapIn class
+		 * 
+		 * workable, inorder using iterative and set up a last var. to check
+		 * will implement later
+		 * 
 		 */
 	}
 
@@ -271,43 +274,48 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 
 	}
 
-	public ArrayList<BTPosition<T>> BFS(){
+	public ArrayList<BTPosition<T>> BFS() {
 		LinkedList<BTPosition<T>> ll = new LinkedList<>();
 		ll.add(root);
 		ArrayList<BTPosition<T>> al = new ArrayList<>();
-		buildQueue(ll,al);
+		buildQueue(ll, al);
 		return al;
 	}
-	private void buildQueue(LinkedList<BTPosition<T>> ll, ArrayList<BTPosition<T>> al) {
+
+	private void buildQueue(LinkedList<BTPosition<T>> ll,
+			ArrayList<BTPosition<T>> al) {
 		BTPosition<T> c;
-		while(!ll.isEmpty()){
+		while (!ll.isEmpty()) {
 			c = ll.poll();
-			if(c.getLeft()!=null)
+			if (c.getLeft() != null)
 				ll.add(c.getLeft());
-			if(c.getRight()!=null)
+			if (c.getRight() != null)
 				ll.add(c.getRight());
 			al.add(c);
 		}
 	}
-	public ArrayList<BTPosition<T>> DFS(){
+
+	public ArrayList<BTPosition<T>> DFS() {
 		Stack<BTPosition<T>> s = new Stack<>();
 		s.add(root);
 		ArrayList<BTPosition<T>> al = new ArrayList<>();
-		buildStack(s,al);
+		buildStack(s, al);
 		return al;
 	}
+
 	private void buildStack(Stack<BTPosition<T>> s, ArrayList<BTPosition<T>> al) {
 		BTPosition<T> c;
-		while(!s.isEmpty()){
+		while (!s.isEmpty()) {
 			c = s.pop();
-			//let right first
-			if(c.getRight()!=null)
+			// let right first
+			if (c.getRight() != null)
 				s.push(c.getRight());
-			if(c.getLeft()!=null)
+			if (c.getLeft() != null)
 				s.push(c.getLeft());
 			al.add(c);
 		}
 	}
+
 	// print helper
 	// public void print(String dataStructure) {
 	// System.out.print(dataStructure + ": ");
@@ -349,8 +357,6 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 	// System.out.println(dots + dots);
 	// }
 
-
-
 	/**
 	 * not efficient, O(n^2)
 	 */
@@ -378,7 +384,7 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 		if (Math.abs(diff) > 1)
 			return -1;
 		else
-			return Math.max(leftH, rightH) + 1;//subtree+currentNode's height
+			return Math.max(leftH, rightH) + 1;// subtree+currentNode's height
 
 	}
 

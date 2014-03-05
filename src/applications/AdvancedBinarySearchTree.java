@@ -26,7 +26,6 @@ public class AdvancedBinarySearchTree<T> extends BinarySearchTree<T> {
 	/**
 	 * get next largest
 	 * 
-	 * @param key
 	 */
 
 	public T NextLargest(T key) throws InvalidPositionException,
@@ -63,7 +62,7 @@ public class AdvancedBinarySearchTree<T> extends BinarySearchTree<T> {
 
 	public BTPosition<T> lowestCommonAncestor(Position<T> root, T a, T b)
 			throws InvalidPositionException {
-		
+
 		BTPosition<T> BTroot = checkPosition(root);
 		while (BTroot != null) {
 
@@ -79,6 +78,50 @@ public class AdvancedBinarySearchTree<T> extends BinarySearchTree<T> {
 		}
 
 		return null;// root is null, empty tree
+
+	}
+
+	/**
+	 * get maximum node
+	 */
+	public BTPosition<T> getMax(BTPosition<T> root) {
+		if (root == null)
+			return null;
+		BTPosition<T> current = root;
+		while (current.getRight() != null) {
+			current = current.getRight();
+		}
+		return current;
+	}
+
+	/**
+	 * get second maximum node
+	 */
+	
+	public BTPosition<T> getSecondMax(BTPosition<T> root) {
+
+		if (root == null)// empty tree
+			return null;
+		if (root.getLeft() == null && root.getRight() == null)// just one node
+			return null;
+
+		// more than two nodes
+		BTPosition<T> current = root, lastNode = null;
+		while (current.getRight() != null) {
+			lastNode = current;
+			current = current.getRight();
+		}
+
+		// check left subtree
+		if (current.getLeft() != null) {
+			current = current.getLeft();
+			while (current.getRight() != null) {
+				current = current.getRight();
+			}
+			return current;
+
+		} else//return parent
+			return lastNode;
 
 	}
 
