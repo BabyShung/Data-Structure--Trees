@@ -66,14 +66,14 @@ public class Test {
 		System.out.println();
 		System.out.print("--BFS: ");
 		ArrayList<BTPosition<Integer>> albfs = tbt.BFS();
-		for(BTPosition<Integer> bt : albfs){
-			System.out.print(bt.element()+" ");
+		for (BTPosition<Integer> bt : albfs) {
+			System.out.print(bt.element() + " ");
 		}
 		System.out.println();
 		System.out.print("--DFS: ");
 		ArrayList<BTPosition<Integer>> aldfs = tbt.DFS();
-		for(BTPosition<Integer> bt : aldfs){
-			System.out.print(bt.element()+" ");
+		for (BTPosition<Integer> bt : aldfs) {
+			System.out.print(bt.element() + " ");
 		}
 		System.out.println();
 		System.out.println("isBST: "
@@ -94,27 +94,27 @@ public class Test {
 							return 0;
 					}
 				});
-		bst.insertNode(5);
-		bst.insertNode(3);
-		bst.insertNode(7);
-		bst.insertNode(2);
-		bst.insertNode(4);
-		bst.insertNode(6);
-		bst.insertNode(9);
-		bst.insertNode(8);
+		bst.insertNodeConcised(5);
+		bst.insertNodeConcised(3);
+		bst.insertNodeConcised(7);
+		bst.insertNodeConcised(2);
+		bst.insertNodeConcised(4);
+		bst.insertNodeConcised(6);
+		bst.insertNodeConcised(9);
+		bst.insertNodeConcised(8);
 		// System.out.println(bst.SearchNode(bst.root(), 3));
-		// bst.inOrderTraveral();
-		// bst.preOrderTraveral();
-		// bst.postOrderTraveral();
+		bst.inOrderTraveral();
+		bst.preOrderTraveral();
+		bst.postOrderTraveral();
 		// bst.print("Binary Search Tree"); // work only for full BT, need
 		// overriding
 
 		BTPosition<Integer> bstRoot = bst.checkPosition(bst.root());
 
 		System.out.println("max element: " + bst.getMax(bstRoot).element());
-		System.out.println("2nd max element: " + bst.getSecondMax(bstRoot).element());
-		
-		
+		System.out.println("2nd max element: "
+				+ bst.getSecondMax(bstRoot).element());
+
 		System.out.println("root tree height: " + bst.treeHeight(bstRoot));
 		System.out.println("root tree depth: " + bst.treeDepth(bstRoot));
 

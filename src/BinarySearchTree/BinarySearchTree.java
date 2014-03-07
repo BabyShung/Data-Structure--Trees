@@ -11,8 +11,8 @@ package BinarySearchTree;
  * Own methods:
  * 
  * 1.SearchNode, O(logN) if it is balanced
- * 2.insertNode, O(logN) if it is balanced
- * 
+ * 2.InsertNode, O(logN) if it is balanced
+ * 3.Remove (not done)
  * 
  * will improve the code and add delete method later.
  * 
@@ -70,6 +70,34 @@ public class BinarySearchTree<T> extends AdvancedBinaryTree<T> {
 		else
 			return SearchNodeRec(BTroot.getRight(), value);
 
+	}
+
+	// iterative insert node
+	public Position<T> insertNodeConcised(T value) throws NoEmptyTreeException,
+			InvalidPositionException {
+		if (root == null)
+			return addRoot(value);
+		BTPosition<T> current = checkPosition(root);
+		while (true) {
+			if (comp.compare(current.element(), value) > 0) {// left
+				if (current.getLeft() == null) {
+					BTPosition<T> newNode = new BinaryTreeNode<T>(value, null,
+							null, current);
+					current.setLeft(newNode);
+					return newNode;
+				}
+				current = current.getLeft();
+			} else if (comp.compare(current.element(), value) < 0) {// right
+				if (current.getRight() == null) {
+					BTPosition<T> newNode = new BinaryTreeNode<T>(value, null,
+							null, current);
+					current.setRight(newNode);
+					return newNode;
+				}
+				current = current.getRight();
+			} else
+				return null;
+		}
 	}
 
 	// iterative insert node
