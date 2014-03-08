@@ -10,6 +10,8 @@ package applications;
  * 
  */
 
+import java.util.Stack;
+
 import BinarySearchTree.BinarySearchTree;
 import Exceptions.EmptyTreeException;
 import Exceptions.InvalidPositionException;
@@ -52,6 +54,27 @@ public class AdvancedBinarySearchTree<T> extends BinarySearchTree<T> {
 
 		return found;
 
+	}
+
+	public T NextLargest2(T key) throws InvalidPositionException,
+			EmptyTreeException {
+
+		BTPosition<T> current = checkPosition(root());
+
+		Stack<BTPosition<T>> s = new Stack<>();
+
+		while (!s.isEmpty() || current != null) {
+			if (current != null) {
+				s.push(current);
+				current = current.getLeft();
+			} else {
+				current = s.pop();
+				if (comp.compare(key, current.element()) < 0)
+					return current.element();
+				current = current.getRight();
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -97,7 +120,7 @@ public class AdvancedBinarySearchTree<T> extends BinarySearchTree<T> {
 	/**
 	 * get second maximum node
 	 */
-	
+
 	public BTPosition<T> getSecondMax(BTPosition<T> root) {
 
 		if (root == null)// empty tree
@@ -120,7 +143,8 @@ public class AdvancedBinarySearchTree<T> extends BinarySearchTree<T> {
 			}
 			return current;
 
-		} else//return parent
+		} else
+			// return parent
 			return lastNode;
 
 	}

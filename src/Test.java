@@ -118,13 +118,14 @@ public class Test {
 		System.out.println("root tree height: " + bst.treeHeight(bstRoot));
 		System.out.println("root tree depth: " + bst.treeDepth(bstRoot));
 
-		System.out.println("BST next largest: " + bst.NextLargest(7));
+		System.out.println("BST next largest: " + bst.NextLargest(5));
+		System.out.println("BST next largest2: " + bst.NextLargest2(5));
 
 		System.out.println("bst isBST: "
 				+ bst.isBST(bstRoot, Integer.MIN_VALUE, Integer.MAX_VALUE));
 		System.out.println("bst isBST2: "
 				+ bst.isBST2(bstRoot, Integer.MIN_VALUE));
-		
+
 		System.out.println("bt isBST: "
 				+ tbt.isBST(btRoot, Integer.MIN_VALUE, Integer.MAX_VALUE));
 		System.out.println("bt isBST2: "
