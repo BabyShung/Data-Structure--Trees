@@ -105,6 +105,33 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 		}
 	}
 
+	public void postOrderTraveralIterative() throws EmptyTreeException,
+			InvalidPositionException {
+		if (root == null)
+			return;
+		Stack<BTPosition<T>> s = new Stack<>();
+		s.push(root);
+		BTPosition<T> p = null;
+		while (!s.empty()) {
+			BTPosition<T> c = s.peek();
+			if (p == null || p.getLeft() == c || p.getRight() == c) {
+				if (c.getLeft() != null)
+					s.push(c.getLeft());
+				else if (c.getRight() != null)
+					s.push(c.getRight());
+
+			} else if (c.getLeft() == p) {
+				if (c.getRight() != null)
+					s.push(c.getRight());
+
+			} else {
+				System.out.println("-post order- " + c.element());
+				s.pop();
+			}
+			p = c;
+		}
+	}
+
 	/**
 	 * check isBST
 	 * 
@@ -171,6 +198,31 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 			return 0;
 		return 1 + Math.max(treeHeight(current.getLeft()),
 				treeHeight(current.getRight()));
+	}
+
+	public int treeHeight2(BTPosition<T> current)
+			throws InvalidPositionException {
+
+		if (current == null)
+			return 0;
+		Stack<BTPosition<T>> s = new Stack<>();
+		int max = 0;
+		int count = 0;
+		while (!s.isEmpty() || current != null) {
+			if (current != null) {
+				s.push(current);
+				count++;
+				current = current.getLeft();
+			} else {// key point, every time null,calculate height
+				current = s.peek();
+				if (current.getRight() == null) {
+					max = Math.max(max, s.size());
+					current = s.pop();
+				}
+				current = current.getRight();
+			}
+		}
+		return max;
 	}
 
 	public int treeDepth(BTPosition<T> current) throws InvalidPositionException {
@@ -380,7 +432,7 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 	// }
 
 	/**
-	 * not efficient, O(n^2)
+	 * isBalanced 1, O(n)
 	 */
 
 	public boolean isBalanced(BTPosition<T> current) {
@@ -410,6 +462,9 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 
 	}
 
+	/**
+	 * isBalanced 2 not efficient, O(n^2)
+	 */
 	public boolean isBalanced2(BTPosition<T> current)
 			throws InvalidPositionException {
 		if (current == null)

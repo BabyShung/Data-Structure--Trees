@@ -58,6 +58,8 @@ public class Test {
 		tbt.preOrderTraveral();
 		tbt.inOrderTraveral();
 		tbt.postOrderTraveral();
+		tbt.postOrderTraveralIterative();
+		
 		System.out.println("B or D FS:");
 		for (Position<Integer> tmp : tbt) {// self iterator,overrided super
 											// class
