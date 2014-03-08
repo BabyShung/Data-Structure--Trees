@@ -50,7 +50,7 @@ public class Test {
 
 		tbt.insertLeft(left, 1);
 		tbt.insertRight(left, 4);
-		tbt.insertLeft(right, 6);
+		tbt.insertLeft(right, 7);
 		tbt.insertRight(right, 9);
 
 		BTPosition<Integer> btRoot = tbt.checkPosition(tbt.root());
@@ -120,8 +120,15 @@ public class Test {
 
 		System.out.println("BST next largest: " + bst.NextLargest(7));
 
-		System.out.println("isBST: "
+		System.out.println("bst isBST: "
 				+ bst.isBST(bstRoot, Integer.MIN_VALUE, Integer.MAX_VALUE));
+		System.out.println("bst isBST2: "
+				+ bst.isBST2(bstRoot, Integer.MIN_VALUE));
+		
+		System.out.println("bt isBST: "
+				+ tbt.isBST(btRoot, Integer.MIN_VALUE, Integer.MAX_VALUE));
+		System.out.println("bt isBST2: "
+				+ tbt.isBST2(btRoot, Integer.MIN_VALUE));
 
 		System.out
 				.println("LCA: " + bst.lowestCommonAncestor(bst.root(), 9, 3));

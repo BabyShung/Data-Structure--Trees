@@ -138,6 +138,28 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 		 */
 	}
 
+	public boolean isBST2(BTPosition<T> current, T min) {
+
+		if (current == null)
+			return true;
+		Stack<BTPosition<T>> s = new Stack<>();
+
+		while (!s.isEmpty() || current != null) {
+			if (current != null) {
+				s.push(current);
+				current = current.getLeft();
+			} else {
+				current = s.pop();
+				if (comp.compare(min, current.element()) > 0)
+					return false;
+				min = current.element();
+				current = current.getRight();
+			}
+		}
+		return true;
+
+	}
+
 	/**
 	 * depth and height
 	 * 
