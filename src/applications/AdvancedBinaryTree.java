@@ -115,6 +115,7 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 		while (!s.empty()) {
 			BTPosition<T> c = s.peek();
 			if (p == null || p.getLeft() == c || p.getRight() == c) {
+				
 				if (c.getLeft() != null)
 					s.push(c.getLeft());
 				else if (c.getRight() != null)
