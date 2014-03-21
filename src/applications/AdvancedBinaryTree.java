@@ -18,7 +18,6 @@ package applications;
  * 9.DFS iterator
  * 10.isBalanced -- a modification of treeHeight O(n), niubility
  * 
- * 
  * Helpers:
  * 1.print
  * 
@@ -115,7 +114,7 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 		while (!s.empty()) {
 			BTPosition<T> c = s.peek();
 			if (p == null || p.getLeft() == c || p.getRight() == c) {
-				
+
 				if (c.getLeft() != null)
 					s.push(c.getLeft());
 				else if (c.getRight() != null)
@@ -480,4 +479,5 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 			return isBalanced(current.getLeft())
 					&& isBalanced(current.getRight());
 	}
+
 }
