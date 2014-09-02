@@ -1,12 +1,11 @@
 import java.security.InvalidKeyException;
 import java.util.ArrayList;
 
+import BinarySearchTree.BST;
 import Exceptions.BoundaryViolationException;
 import Exceptions.EmptyTreeException;
 import Exceptions.InvalidPositionException;
 import Exceptions.NoEmptyTreeException;
-import Heap.ArrayHeap;
-import Heap.HeapNode;
 import Interfaces.BTPosition;
 import Interfaces.Comparator;
 import Interfaces.Position;
@@ -59,7 +58,7 @@ public class Test {
 		tbt.inOrderTraveral();
 		tbt.postOrderTraveral();
 		tbt.postOrderTraveralIterative();
-		
+
 		System.out.println("B or D FS:");
 		for (Position<Integer> tmp : tbt) {// self iterator,overrided super
 											// class
@@ -137,6 +136,21 @@ public class Test {
 				.println("LCA: " + bst.lowestCommonAncestor(bst.root(), 9, 3));
 
 		bst.KDistanceFromRoot(2);
+
+		BST haoBST = new BST();
+		haoBST.insert(5);
+		haoBST.insert(3);
+		haoBST.insert(7);
+		haoBST.insert(4);
+		haoBST.insert(2);
+		haoBST.insert(6);
+		haoBST.insert(9);
+		haoBST.insert(15);
+		haoBST.insert(11);
+		haoBST.insert(13);
+
+		System.out.println(haoBST.getMaxNode());
+		System.out.println(haoBST.getSecondMax());
 
 		// ArrayHeap<Integer> ah = new ArrayHeap<>(new Comparator<Integer>() {
 		//

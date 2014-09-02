@@ -348,6 +348,10 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 
 	}
 
+	
+	/**
+	 * Classic BFS
+	 */
 	public ArrayList<BTPosition<T>> BFS() {
 		LinkedList<BTPosition<T>> ll = new LinkedList<>();
 		ll.add(root);
@@ -369,6 +373,9 @@ public class AdvancedBinaryTree<T> extends LinkedBinaryTree<T> {
 		}
 	}
 
+	/**
+	 * Classic DFS
+	 */
 	public ArrayList<BTPosition<T>> DFS() {
 		Stack<BTPosition<T>> s = new Stack<>();
 		s.add(root);

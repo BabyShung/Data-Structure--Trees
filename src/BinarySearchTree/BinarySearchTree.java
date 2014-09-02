@@ -3,7 +3,8 @@ package BinarySearchTree;
 /**
  * Binary Search Tree based on linked list
  * 
- * It extends the self-defined AdvancedBinaryTree, which has all the traversals (pre,post,in order),etc.
+ * It extends my self-defined AdvancedBinaryTree, 
+ * which has all the traversals (pre,post,in order),etc.
  * AdvancedBinaryTree extends the LinkedBinaryTree ( basic methods: getLeft,getRight,etc).
  * 
  * 
