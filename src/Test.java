@@ -137,6 +137,8 @@ public class Test {
 
 		bst.KDistanceFromRoot(2);
 
+		
+		//Hao BST
 		BST haoBST = new BST();
 		haoBST.insert(5);
 		haoBST.insert(3);
