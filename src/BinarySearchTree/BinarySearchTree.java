@@ -13,7 +13,12 @@ package BinarySearchTree;
  * 
  * 1.SearchNode, O(logN) if it is balanced
  * 2.InsertNode, O(logN) if it is balanced
- * 3.Remove (not done)
+ * 3.Remove (not done)	three cases, 
+ * ---the delete node has no child -> do nothing
+ * ---the delete node has one child -> move the subtree
+ * ---the delete node has two children -> find the next largest
+ * 				
+ * 	
  * 
  * will improve the code and add delete method later.
  * 
